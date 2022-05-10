@@ -14,6 +14,8 @@ createButtons();
 document.querySelectorAll('.switch-input').forEach(item => {
 
     item.addEventListener('click', event => {
+
+        //check which audio the user wants to mute
         let id = event.target.id;
 
         if (id != '') {
@@ -21,27 +23,26 @@ document.querySelectorAll('.switch-input').forEach(item => {
             let tempArr = id.match(/(\d+)/);
             let indexSong = Number(tempArr[0]);
 
-            if (document.getElementById(id).checked) 
+            if (document.getElementById(id).checked) //if mute button is no/off
                 muteSong(indexSong, true);
             else 
                 muteSong(indexSong, false);
-            
         }
     })
 })
 
+//get the index of the song that needs to mute or unmute
 function muteSong (index, isChecked) {
 
     document.getElementById(`audio${index}`).muted = isChecked;
-    console.log(`audio${index}`, isChecked);
-
 }
 
 //creating the 9 audio elements
 function createAllAudio() {
 
-    for (let i = 0; i < songs.length; i++) {//TODO: try to split to more functions
+    for (let i = 0; i < songs.length; i++) {
 
+        //creating a new audio line- with text, audio file and button
         const newText = document.createElement('div');
 
         newText.textContent = songs[i];
@@ -49,22 +50,22 @@ function createAllAudio() {
         newText.classList.add('audio-row');
         newText.id=songs[i];
 
+        //creating the audio element
         const newAudio = document.createElement('audio');
         newAudio.id = `audio${i}`;
         newAudio.innerHTML = `<source src='music/${songs[i]}.mp3' type='audio/mpeg'>`;
 
         newText.appendChild(newAudio);
 
+        //creating button
         const newBtn = document.createElement('label');
         newBtn.classList.add("switch");
-        newBtn.onclick = muteBtnPressed;
         newBtn.id = `mute${i}-label`;
         newBtn.innerHTML = `<input type='checkbox' class='switch-input' id='mute${i}'> <span class='slider'></span><span class='labels' data-on='Unmute' data-off='Mute'></span>`;
 
         newText.appendChild(newBtn);
 
         musicInfo[0].appendChild(newText);
-
     }
 }
 
@@ -84,9 +85,9 @@ function createButtons() {
 
     const loopBtn = document.createElement('label');
     loopBtn.classList.add("switch");
-    loopBtn.id = "loopAll";
+    //loopBtn.id = "loopAll";
     loopBtn.onclick = loopAllSongs;
-    loopBtn.innerHTML = "<input type='checkbox'> <span class='slider'></span><span class='labels' data-on='Stop Loop' data-off='Loop'></span>";
+    loopBtn.innerHTML = "<input type='checkbox' id= 'loopAll'> <span class='slider'></span><span class='labels' data-on='Stop Loop' data-off='Loop'></span>";
 
     allBtn[0].appendChild(playBtn);
     allBtn[0].appendChild(stopBtn);
@@ -108,7 +109,7 @@ function playAllSongs() {
 }
 
 function stopAllSongs() {
-
+    //stop playing all songs
     for (let i = 0; i < songs.length; i++) {
 
         let song = document.getElementById(`audio${i}`);
@@ -121,37 +122,16 @@ function stopAllSongs() {
 
 function loopAllSongs() {
 
-    //const loopBtn = document.getElementById("loopAll");
-    //boolean varible- to update loop fild. defult toggel is off
-    //let goLoop = true;
+    //when the toggel in on- update all songs to play in loop. otherwise- stop looping in all songs
+    if (document.getElementById('loopAll').checked)
+        updateLoopStat(true);
+    else 
+        updateLoopStat(false);
+}
 
-    //if (loopBtn.checked) 
-    //    goLoop = false;
-  
+function updateLoopStat(doLoop) {
     for (let i = 0; i < songs.length; i++) {
-        if (!document.getElementById(`mute${i}`).checked) {
-            console.log(`loop audio${i}`);
-            document.getElementById(`audio${i}`).loop = true;
-        }
+
+        document.getElementById(`audio${i}`).loop = doLoop;
     }
-    
-
-     
 }
-
-function muteBtnPressed() {
-
-
-}
-
-//document.getElementById("playAll").addEventListener('click', () => {
-
-//	console.log("in play func");
-
-//	for (let i = 0; i < songs.length; i++) {
-
-//		document.getElementById('audio${i}').play();
-//	}
-//	console.log("finished play func");
-
-//});
