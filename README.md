@@ -1,6 +1,6 @@
 # Moveo Home Test
 
-A web page with nine audio files, and three buttons- play, stop, loop.
+A web page with nine audio files, and three buttons: play, stop, loop.
 
 In this project, I used an HTML file, a CSS file for design, and a javascript file for the dynamic code.
 
@@ -8,7 +8,7 @@ This whole project was new to me and I needed to learn a lot these days.
 I choose to code with javascript because during my studying I had experience with this language, and it is the base of a lot of other languages.
 
 I used onClick methods and eventListeners to detect when a button was pressed. 
-I used an array of all the audio names (with the number of elements that were given in the assignment), and an array of colors (of the same size). So it will be more dynamic to create the elements in the HTML file. I created an audio line during loop iteration with an audio file, text, unique color, etc.
+I used an array of all the audio names (with the number of elements that were given in the assignment), and an array of colors (of the same size), So it will be more dynamic to create the elements in the HTML file. An audio line was created during loop iteration with an audio file, text, unique color, etc.
 
 Below all the audio lines there are three buttons: 
 1. Play- playing all audio files simultaneously
@@ -26,4 +26,4 @@ Thank you for the opportunity,
 
 Yael Norman
 
-Note: I saw that all the samples has the same length, I'm sorry that i didn't do it.
+Note: I saw that all the samples has to be the same length, I'm sorry that I didn't do it.
